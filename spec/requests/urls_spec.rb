@@ -20,9 +20,9 @@ RSpec.describe 'Urls', type: :request do
         expect(response.body).to include('alert.addClass("alert-success")')
       end
 
-      it "matches `My short URL`" do
+      it "matches code_url with the url code" do
         post urls_path, params: valid_params, xhr: true
-        expect(response.body).to include('My short URL')
+        expect(response.body).to include(code_url(code: Url.last.code))
       end
     end
   end

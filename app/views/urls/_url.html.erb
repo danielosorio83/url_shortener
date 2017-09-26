@@ -2,6 +2,7 @@
   if @url.errors.any?
     @url.errors.full_messages.to_sentence
   else
-    "My short URL"
+    link_url = code_url(code: @url.code)
+    link_to link_url, link_url, target: :blank
   end
 %>
