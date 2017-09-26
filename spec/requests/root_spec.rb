@@ -6,5 +6,10 @@ RSpec.describe 'Root', type: :request do
       get root_path
       expect(response).to have_http_status(200)
     end
+
+    it "matches with the `urls_path`" do
+      get root_path
+      expect(response.body).to match(urls_path)
+    end
   end
 end
