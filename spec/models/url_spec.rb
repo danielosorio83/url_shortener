@@ -94,11 +94,10 @@ RSpec.describe Url, type: :model do
         expect(url.code).not_to be_nil
       end
 
-      it 'returns part of a Base64.urlsafe_encode64 of the current time' do
-        now = Time.now
-        allow(Time).to receive(:now).and_return(now)
-        base64_code = Base64.urlsafe_encode64(now.to_i.to_s)[7...-2]
-        expect(url.send(:generate_code)).to eq(base64_code)
+      it 'calls `CodeStorage.next_code`' do
+        url = build(:url)
+        expect(CodeStorage).to receive(:next_code).and_return(1)
+        url.send(:generate_code)
       end
     end
 

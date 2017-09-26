@@ -26,7 +26,7 @@ class Url < ApplicationRecord
   private
 
   def generate_code
-    self.code = Base64.urlsafe_encode64(Time.now.to_i.to_s)[7...-2] # subs part of the string
+    self.code = CodeStorage.next_code
   end
 
   def sanitize_url
