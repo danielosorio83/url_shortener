@@ -1,8 +1,9 @@
-<%=
-  if @url.errors.any?
-    @url.errors.full_messages.to_sentence
-  else
-    link_url = code_url(code: @url.code)
-    link_to link_url, link_url, target: :blank
-  end
-%>
+<% if @url.errors.any? %>
+  <%= @url.errors.full_messages.to_sentence %>
+<% else %>
+  <% link_url = code_url(code: @url.code) %>
+  <%= link_to link_url, link_url, target: :blank, id: 'link_url' %>
+  <button class="clipboard-btn close" data-clipboard-action="copy" data-clipboard-target="#link_url">
+    <%= fa_icon 'clipboard', text: 'Copy to clipboard' %>
+  </button>
+<% end %>

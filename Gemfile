@@ -6,6 +6,8 @@ git_source(:github) do |repo_name|
 end
 
 gem 'bootstrap', '~> 4.0.0.beta'
+gem 'clipboard-rails', '1.7.1'
+gem 'font-awesome-rails', '4.7.0.2'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails', '4.3.1'
 gem 'pg', '0.21.0'
