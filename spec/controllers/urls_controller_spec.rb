@@ -14,8 +14,8 @@ RSpec.describe UrlsController, type: :controller do
       expect(assigns(:url)).to be_kind_of(Url)
     end
 
-    it 'calls `Url.find_or_create_by`' do
-      expect(Url).to receive(:find_or_create_by).with(kind_of(ActionController::Parameters))
+    it 'calls `Url.search`' do
+      expect(Url).to receive(:search).with(kind_of(ActionController::Parameters))
       post :create, params: valid_params, xhr: true
     end
   end

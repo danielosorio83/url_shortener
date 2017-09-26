@@ -1,7 +1,7 @@
 class UrlsController < ApplicationController
   # POST /urls
   def create
-    @url = Url.find_or_create_by(permitted_params)
+    @url = Url.search(permitted_params)
   end
 
   private
