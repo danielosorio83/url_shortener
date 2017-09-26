@@ -15,6 +15,7 @@ class Url < ApplicationRecord
 
   # Callbacks
   before_create :sanitize_url
+  before_validation :generate_code, on: :create
 
   def self.search(params)
     url = new(params)
@@ -23,6 +24,10 @@ class Url < ApplicationRecord
   end
 
   private
+
+  def generate_code
+    self.code = Base64.urlsafe_encode64(Time.now.to_i.to_s)[7...-2] # subs part of the string
+  end
 
   def sanitize_url
     return unless self.original_url

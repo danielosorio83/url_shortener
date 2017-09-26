@@ -31,6 +31,7 @@ RSpec.describe Url, type: :model do
   end
 
   describe 'Callbacks' do
+    it { is_expected.to callback(:generate_code).before(:validation).on(:create) }
     it { is_expected.to callback(:sanitize_url).before(:create) }
   end
 
@@ -83,6 +84,24 @@ RSpec.describe Url, type: :model do
   end
 
   describe 'Private Instance Methods' do
+    describe '#generate_code' do
+      let(:url) { build(:url) }
+
+      it 'sets `code`' do
+        url = build(:url)
+        expect(url.code).to be_nil
+        url.send(:generate_code)
+        expect(url.code).not_to be_nil
+      end
+
+      it 'returns part of a Base64.urlsafe_encode64 of the current time' do
+        now = Time.now
+        allow(Time).to receive(:now).and_return(now)
+        base64_code = Base64.urlsafe_encode64(now.to_i.to_s)[7...-2]
+        expect(url.send(:generate_code)).to eq(base64_code)
+      end
+    end
+
     describe '#sanitize_url' do
       it 'returns nil when original_url is empty' do
         url = build(:url, original_url: nil)
