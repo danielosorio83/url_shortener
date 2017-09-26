@@ -1,0 +1,7 @@
+<%=
+  if @url.errors.any?
+    @url.errors.full_messages.to_sentence
+  else
+    "My short URL"
+  end
+%>

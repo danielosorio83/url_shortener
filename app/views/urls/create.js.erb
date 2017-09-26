@@ -1,0 +1,6 @@
+var link = $("#link");
+var alert = link.parent('.alert');
+alert.removeClass("alert-success");
+alert.removeClass("alert-danger");
+alert.addClass("alert-<%= alert_class(@url) %>");
+$("#link").html("<%= escape_javascript(render 'url').html_safe %>");

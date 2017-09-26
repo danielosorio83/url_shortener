@@ -10,4 +10,6 @@
 #
 
 class Url < ApplicationRecord
+  # Validations
+  validates :original_url, uniqueness: true, presence: true, url: true
 end
