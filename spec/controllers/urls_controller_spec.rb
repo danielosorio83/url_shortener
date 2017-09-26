@@ -19,4 +19,22 @@ RSpec.describe UrlsController, type: :controller do
       post :create, params: valid_params, xhr: true
     end
   end
+
+  describe "GET #show" do
+    context 'when `code` is valid' do
+      let(:url) { create(:url) }
+
+      it "redirects to `original_url`" do
+        get :show, params: { code: url.code }
+        expect(response).to redirect_to(url.original_url)
+      end
+    end
+
+    context 'when `code` is invalid' do
+      it "redirects to `original_url`" do
+        get :show, params: { code: 'error' }
+        expect(response).to redirect_to(root_url)
+      end
+    end
+  end
 end

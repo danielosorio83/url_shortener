@@ -4,6 +4,12 @@ class UrlsController < ApplicationController
     @url = Url.search(permitted_params)
   end
 
+  # GET /:code
+  def show
+    @url = Url.find_by!(code: params[:code])
+    redirect_to @url.original_url
+  end
+
   private
 
   def permitted_params
